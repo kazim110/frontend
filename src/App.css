@@ -262,9 +262,76 @@
   font-weight: 800;
 }
 
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.page-heading {
+  margin-bottom: 2px;
+}
+
 .manager-grid {
   display: grid;
   gap: 16px;
+}
+
+.role-page {
+  gap: 16px;
+}
+
+.role-page-description {
+  margin: 0;
+}
+
+.role-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.role-summary-grid div,
+.role-details-grid div {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  background: var(--bg);
+}
+
+.role-summary-grid strong {
+  color: var(--text-h);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.role-summary-grid span,
+.role-details-grid dt {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.role-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.role-details-grid dd {
+  margin: 0;
+  color: var(--text-h);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.role-detail-actions {
+  justify-content: flex-start;
 }
 
 .manager-section {
@@ -413,6 +480,20 @@
   .role-card-header {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .page-actions,
+  .role-detail-actions {
+    justify-content: stretch;
+  }
+
+  .page-actions > * {
+    flex: 1 1 auto;
+  }
+
+  .role-summary-grid,
+  .role-details-grid {
+    grid-template-columns: 1fr;
   }
 
   .inline-form {
