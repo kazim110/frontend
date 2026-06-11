@@ -1,20 +1,25 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getErrorMessage } from '../../services/authApi'
 import { fetchPermissions, fetchRoles } from '../../services/authorizationApi'
-import PermissionManager from './PermissionManager'
-import UserRoleSyncForm from './UserRoleSyncForm'
+import PermissionCreatePage from './pages/PermissionCreatePage'
+import PermissionDetailsPage from './pages/PermissionDetailsPage'
+import PermissionListPage from './pages/PermissionListPage'
 import RoleCreatePage from './pages/RoleCreatePage'
 import RoleDetailsPage from './pages/RoleDetailsPage'
 import RoleEditPage from './pages/RoleEditPage'
 import RoleListPage from './pages/RoleListPage'
 import RolePageLayout from './RolePageLayout'
+import { parseAuthorizationPath } from './authorizationRoutes'
+import { permissionCreatePath, permissionListPath } from './permissionRoutes'
 import { parseRolePath, roleCreatePath, roleListPath } from './roleRoutes'
+import UserRoleDetailsPage from './pages/UserRoleDetailsPage'
+import UserRoleEditPage from './pages/UserRoleEditPage'
+import UserRoleListPage from './pages/UserRoleListPage'
+import { userRoleEditPath, userRoleListPath } from './userRoleRoutes'
 
-function AuthorizationOverview({ roles, permissions, onChanged, onNavigate }) {
+function AuthorizationOverview({ roles, permissions, onNavigate }) {
   return (
     <div className="manager-grid">
-      <PermissionManager permissions={permissions} onChanged={onChanged} />
-      <UserRoleSyncForm roles={roles} />
       <RolePageLayout
         title="Roles"
         description="Open role management on dedicated pages for listing, details, creation, and edits."
@@ -43,6 +48,58 @@ function AuthorizationOverview({ roles, permissions, onChanged, onNavigate }) {
           Go to the role list
         </button>
       </RolePageLayout>
+
+      <RolePageLayout
+        title="Permissions"
+        description="Open permission management on dedicated pages for listing, details, and creation."
+        actions={
+          <div className="page-actions">
+            <button className="secondary-button compact-button" type="button" onClick={() => onNavigate(permissionListPath())}>
+              Open list
+            </button>
+            <button className="primary-button compact-button" type="button" onClick={() => onNavigate(permissionCreatePath())}>
+              Create permission
+            </button>
+          </div>
+        }
+      >
+        <div className="role-summary-grid">
+          <div>
+            <strong>{permissions.length}</strong>
+            <span>permissions available</span>
+          </div>
+          <div>
+            <strong>{roles.length}</strong>
+            <span>roles using permissions</span>
+          </div>
+        </div>
+      </RolePageLayout>
+
+      <RolePageLayout
+        title="User roles"
+        description="Open user-role syncing on dedicated pages for the form and the latest result."
+        actions={
+          <div className="page-actions">
+            <button className="secondary-button compact-button" type="button" onClick={() => onNavigate(userRoleListPath())}>
+              Open list
+            </button>
+            <button className="primary-button compact-button" type="button" onClick={() => onNavigate(userRoleEditPath())}>
+              Sync user roles
+            </button>
+          </div>
+        }
+      >
+        <div className="role-summary-grid">
+          <div>
+            <strong>{roles.length}</strong>
+            <span>roles available</span>
+          </div>
+          <div>
+            <strong>1</strong>
+            <span>sync form</span>
+          </div>
+        </div>
+      </RolePageLayout>
     </div>
   )
 }
@@ -50,6 +107,7 @@ function AuthorizationOverview({ roles, permissions, onChanged, onNavigate }) {
 function AuthorizationManager() {
   const [roles, setRoles] = useState([])
   const [permissions, setPermissions] = useState([])
+  const [lastUserSnapshot, setLastUserSnapshot] = useState(null)
   const [status, setStatus] = useState({ loading: true, error: '' })
   const [pathname, setPathname] = useState(() => window.location.pathname)
 
@@ -105,6 +163,7 @@ function AuthorizationManager() {
   }, [])
 
   const route = useMemo(() => parseRolePath(pathname), [pathname])
+  const authorizationRoute = useMemo(() => parseAuthorizationPath(pathname), [pathname])
 
   function navigate(nextPath) {
     if (window.location.pathname !== nextPath) {
@@ -115,6 +174,9 @@ function AuthorizationManager() {
   }
 
   const currentRole = roles.find((role) => String(role.id) === String(route.roleId))
+  const currentPermission = permissions.find((permission) => String(permission.id) === String(authorizationRoute.permissionId))
+  const currentUserSnapshot =
+    lastUserSnapshot && String(lastUserSnapshot.id) === String(authorizationRoute.userId) ? lastUserSnapshot : null
 
   function renderRolePage() {
     if (route.page === 'create') {
@@ -140,6 +202,53 @@ function AuthorizationManager() {
     return <RoleListPage roles={roles} onChanged={loadAuthorization} onNavigate={navigate} />
   }
 
+  function renderPermissionPage() {
+    if (authorizationRoute.page === 'create') {
+      return <PermissionCreatePage onChanged={loadAuthorization} onNavigate={navigate} />
+    }
+
+    if (authorizationRoute.page === 'details') {
+      return <PermissionDetailsPage permission={currentPermission} onChanged={loadAuthorization} onNavigate={navigate} />
+    }
+
+    return <PermissionListPage permissions={permissions} onChanged={loadAuthorization} onNavigate={navigate} />
+  }
+
+  function renderUserRolePage() {
+    if (authorizationRoute.page === 'details') {
+      return <UserRoleDetailsPage user={currentUserSnapshot} onNavigate={navigate} />
+    }
+
+    if (authorizationRoute.page === 'edit') {
+      return (
+        <UserRoleEditPage
+          roles={roles}
+          onChanged={loadAuthorization}
+          onNavigate={navigate}
+          onSynced={setLastUserSnapshot}
+        />
+      )
+    }
+
+    return <UserRoleListPage roles={roles} lastUpdate={lastUserSnapshot} onNavigate={navigate} />
+  }
+
+  function renderSectionPage() {
+    if (authorizationRoute.section === 'roles') {
+      return renderRolePage()
+    }
+
+    if (authorizationRoute.section === 'permissions') {
+      return renderPermissionPage()
+    }
+
+    if (authorizationRoute.section === 'userRoles') {
+      return renderUserRolePage()
+    }
+
+    return <AuthorizationOverview roles={roles} permissions={permissions} onNavigate={navigate} />
+  }
+
   return (
     <section className="authorization-panel">
       <div className="section-heading">
@@ -163,7 +272,7 @@ function AuthorizationManager() {
       {status.error && <p className="error">{status.error}</p>}
 
       {!status.loading && (
-        <>{route.page === 'overview' ? <AuthorizationOverview roles={roles} permissions={permissions} onChanged={loadAuthorization} onNavigate={navigate} /> : renderRolePage()}</>
+        <>{authorizationRoute.section === 'overview' ? <AuthorizationOverview roles={roles} permissions={permissions} onNavigate={navigate} /> : renderSectionPage()}</>
       )}
     </section>
   )
