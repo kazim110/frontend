@@ -107,6 +107,246 @@
   justify-content: space-between;
 }
 
+.landing-page {
+  display: grid;
+  gap: 22px;
+}
+
+.landing-hero,
+.landing-section {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.landing-hero {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  align-items: center;
+  gap: 30px;
+  overflow: hidden;
+  padding: 56px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(8, 15, 23, 0.9), rgba(15, 118, 110, 0.76)),
+    url('./assets/hero.png') center / cover;
+}
+
+.landing-hero-copy {
+  max-width: 680px;
+}
+
+.landing-hero h1 {
+  margin: 12px 0 18px;
+  color: #ffffff;
+  font-size: clamp(44px, 6vw, 76px);
+  line-height: 0.96;
+}
+
+.landing-hero p {
+  max-width: 580px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 18px;
+}
+
+.landing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-button {
+  min-width: 150px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  text-decoration: none;
+}
+
+.landing-hero .secondary-button {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.hero-visual {
+  min-height: 430px;
+  position: relative;
+}
+
+.hero-visual::before {
+  width: 310px;
+  height: 310px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  border-radius: 999px;
+  background: #facc15;
+  content: '';
+}
+
+.hero-visual::after {
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  right: 180px;
+  bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  content: '';
+}
+
+.hero-card {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  padding: 22px;
+  color: #ffffff;
+  background: rgba(7, 13, 20, 0.72);
+  backdrop-filter: blur(14px);
+}
+
+.hero-card span,
+.hero-card small {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.hero-card strong {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.hero-card-main {
+  right: 90px;
+  top: 95px;
+}
+
+.hero-card-alt {
+  right: 12px;
+  bottom: 72px;
+}
+
+.landing-section {
+  padding: 46px;
+}
+
+.landing-section h2 {
+  margin: 8px 0 0;
+  color: var(--text-h);
+  font-size: 38px;
+  line-height: 1.06;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.about-copy {
+  display: grid;
+  gap: 14px;
+  color: var(--text);
+  font-size: 17px;
+}
+
+.about-copy p {
+  margin: 0;
+}
+
+.landing-heading {
+  margin-bottom: 24px;
+}
+
+.customer-grid,
+.contract-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.contract-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.customer-card,
+.contract-card {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--bg);
+}
+
+.customer-card strong,
+.contract-card h3 {
+  margin: 0;
+  color: var(--text-h);
+  font-size: 20px;
+}
+
+.customer-card span,
+.contract-card p {
+  margin: 0;
+  color: var(--text);
+}
+
+.contract-card > span {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: #854d0e;
+  background: #fef3c7;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.contact-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 46px;
+  color: #ffffff;
+  background: #111827;
+}
+
+.contact-copy h2 {
+  color: #ffffff;
+}
+
+.contact-copy p {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.contact-link {
+  width: fit-content;
+  color: #facc15;
+  font-weight: 800;
+}
+
+.contact-auth .auth-panel {
+  min-height: 100%;
+}
+
 .auth-shell {
   width: 100%;
   min-height: 0;
@@ -597,6 +837,51 @@
   }
 
   .auth-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-hero,
+  .about-section,
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-hero,
+  .landing-section,
+  .contact-copy {
+    padding: 28px;
+  }
+
+  .landing-hero {
+    min-height: auto;
+  }
+
+  .landing-hero h1 {
+    font-size: 42px;
+  }
+
+  .hero-visual {
+    min-height: 260px;
+  }
+
+  .hero-visual::before {
+    width: 210px;
+    height: 210px;
+  }
+
+  .hero-card-main {
+    left: 0;
+    right: auto;
+    top: 40px;
+  }
+
+  .hero-card-alt {
+    right: 0;
+    bottom: 28px;
+  }
+
+  .customer-grid,
+  .contract-grid {
     grid-template-columns: 1fr;
   }
 

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import BrandPanel from './features/auth/BrandPanel'
 import Dashboard from './features/auth/Dashboard'
+import LandingPage from './features/landing/LandingPage'
 import LoginForm from './features/auth/LoginForm'
 import RegisterForm from './features/auth/RegisterForm'
 import AppLayout from './components/AppLayout'
@@ -46,15 +46,13 @@ function App() {
           <Dashboard auth={auth} onLogout={handleLogout} />
         </main>
       ) : (
-        <main className="auth-shell">
-          <BrandPanel />
-
+        <LandingPage>
           {mode === 'register' ? (
             <RegisterForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('login')} />
           ) : (
             <LoginForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('register')} />
           )}
-        </main>
+        </LandingPage>
       )}
     </AppLayout>
   )

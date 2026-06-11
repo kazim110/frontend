@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 
-const guestNavigation = [{ label: 'Auth', path: '/' }]
+const guestNavigation = [
+  { label: 'Home', path: '#home' },
+  { label: 'About', path: '#about' },
+  { label: 'Customers', path: '#customers' },
+  { label: 'Contracts', path: '#contracts' },
+  { label: 'Contact us', path: '#contact' },
+]
 
 const appNavigation = [
   { label: 'Account', path: '/login-success', exact: true },
@@ -10,6 +16,10 @@ const appNavigation = [
 ]
 
 function isActivePath(currentPath, item) {
+  if (item.path.startsWith('#')) {
+    return window.location.hash === item.path
+  }
+
   if (item.exact) {
     return currentPath === item.path
   }
@@ -27,13 +37,19 @@ function Sidebar({ auth }) {
     }
 
     window.addEventListener('popstate', handleLocationChange)
+    window.addEventListener('hashchange', handleLocationChange)
 
     return () => {
       window.removeEventListener('popstate', handleLocationChange)
+      window.removeEventListener('hashchange', handleLocationChange)
     }
   }, [])
 
   function handleNavigate(event, path) {
+    if (path.startsWith('#')) {
+      return
+    }
+
     event.preventDefault()
 
     if (window.location.pathname !== path) {
