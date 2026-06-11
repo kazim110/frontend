@@ -3,10 +3,10 @@ function ContactSection({ children }) {
     <section className="landing-section contact-section" id="contact">
       <div className="contact-copy">
         <p className="eyebrow">Contact us</p>
-        <h2>Start a workspace or talk to the team.</h2>
+        <h2>Ready to craft solid digital products and services?</h2>
         <p>
-          Create an account to enter the protected dashboard, or send a project note and we will
-          shape the next step with you.
+          Create an account to enter your protected client workspace, or contact the team to plan a
+          strategy call.
         </p>
         <a className="contact-link" href="mailto:hello@dorna.local">
           hello@dorna.local

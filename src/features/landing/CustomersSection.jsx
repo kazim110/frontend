@@ -1,4 +1,4 @@
-const customers = ['Nexa Labs', 'Orbit Studio', 'Apex Finance', 'Helio Group']
+const customers = ['AnyDesk', 'Alphabet', 'Microsoft', 'Ryzen', 'Puma', 'Nike']
 
 function CustomersSection() {
   return (
@@ -6,7 +6,7 @@ function CustomersSection() {
       <div className="section-heading landing-heading">
         <div>
           <p className="eyebrow">Customers</p>
-          <h2>Trusted by teams building serious digital products.</h2>
+          <h2>Over 2K+ software businesses growing with our business.</h2>
         </div>
         <span>24+ active partners</span>
       </div>
