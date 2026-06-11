@@ -1,5 +1,5 @@
-import { userRoleEditPath, userRoleListPath } from '../userRoleRoutes'
-import RolePageLayout from '../RolePageLayout'
+import { userRoleEditPath, userRoleListPath } from '../../userRoleRoutes'
+import RolePageLayout from '../../RolePageLayout'
 
 function UserRoleDetailsPage({ user, onNavigate }) {
   if (!user) {

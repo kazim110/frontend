@@ -1,7 +1,7 @@
-import { getErrorMessage } from '../../../services/authApi'
-import { deletePermission } from '../../../services/authorizationApi'
-import { permissionCreatePath, permissionDetailsPath, permissionListPath } from '../permissionRoutes'
-import RolePageLayout from '../RolePageLayout'
+import { getErrorMessage } from '../../../../services/authApi'
+import { deletePermission } from '../../../../services/authorizationApi'
+import { permissionCreatePath, permissionDetailsPath, permissionListPath } from '../../permissionRoutes'
+import RolePageLayout from '../../RolePageLayout'
 
 function PermissionListPage({ permissions, onNavigate, onChanged }) {
   async function remove(permissionId) {

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { getErrorMessage } from '../../../services/authApi'
-import { syncUserRoles } from '../../../services/authorizationApi'
-import { userRoleDetailsPath, userRoleListPath } from '../userRoleRoutes'
-import RolePageLayout from '../RolePageLayout'
+import { getErrorMessage } from '../../../../services/authApi'
+import { syncUserRoles } from '../../../../services/authorizationApi'
+import { userRoleDetailsPath, userRoleListPath } from '../../userRoleRoutes'
+import RolePageLayout from '../../RolePageLayout'
 
 function UserRoleEditPage({ roles, onNavigate, onChanged, onSynced }) {
   const [userId, setUserId] = useState('')

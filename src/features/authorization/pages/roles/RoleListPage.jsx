@@ -1,7 +1,7 @@
-import { getErrorMessage } from '../../../services/authApi'
-import { deleteRole } from '../../../services/authorizationApi'
-import { roleCreatePath, roleDetailsPath, roleEditPath, roleListPath } from '../roleRoutes'
-import RolePageLayout from '../RolePageLayout'
+import { getErrorMessage } from '../../../../services/authApi'
+import { deleteRole } from '../../../../services/authorizationApi'
+import { roleCreatePath, roleDetailsPath, roleEditPath, roleListPath } from '../../roleRoutes'
+import RolePageLayout from '../../RolePageLayout'
 
 function RoleListPage({ roles, onNavigate, onChanged }) {
   async function remove(roleId) {

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { getErrorMessage } from '../../../services/authApi'
-import { createPermission } from '../../../services/authorizationApi'
-import { permissionDetailsPath, permissionListPath } from '../permissionRoutes'
-import RolePageLayout from '../RolePageLayout'
+import { getErrorMessage } from '../../../../services/authApi'
+import { createPermission } from '../../../../services/authorizationApi'
+import { permissionDetailsPath, permissionListPath } from '../../permissionRoutes'
+import RolePageLayout from '../../RolePageLayout'
 
 function PermissionCreatePage({ onChanged, onNavigate }) {
   const [name, setName] = useState('')

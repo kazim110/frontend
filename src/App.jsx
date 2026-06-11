@@ -3,6 +3,7 @@ import BrandPanel from './features/auth/BrandPanel'
 import Dashboard from './features/auth/Dashboard'
 import LoginForm from './features/auth/LoginForm'
 import RegisterForm from './features/auth/RegisterForm'
+import AppLayout from './components/AppLayout'
 import { logoutUser } from './services/authApi'
 import { getStoredAuth, storeAuth } from './services/authStorage'
 import './App.css'
@@ -39,17 +40,23 @@ function App() {
   }
 
   return (
-    <main className="auth-shell">
-      <BrandPanel />
-
+    <AppLayout auth={auth}>
       {auth ? (
-        <Dashboard auth={auth} onLogout={handleLogout} />
-      ) : mode === 'register' ? (
-        <RegisterForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('login')} />
+        <main className="auth-shell dashboard-shell">
+          <Dashboard auth={auth} onLogout={handleLogout} />
+        </main>
       ) : (
-        <LoginForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('register')} />
+        <main className="auth-shell">
+          <BrandPanel />
+
+          {mode === 'register' ? (
+            <RegisterForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('login')} />
+          ) : (
+            <LoginForm onAuthenticated={handleAuthenticated} onSwitch={() => setMode('register')} />
+          )}
+        </main>
       )}
-    </main>
+    </AppLayout>
   )
 }
 

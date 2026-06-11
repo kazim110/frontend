@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { getErrorMessage } from '../../../services/authApi'
-import { updateRole } from '../../../services/authorizationApi'
-import { roleDetailsPath, roleListPath } from '../roleRoutes'
-import RolePageLayout from '../RolePageLayout'
-import RoleFormFields from '../RoleFormFields'
-import { permissionNames } from '../roleFormUtils'
+import { getErrorMessage } from '../../../../services/authApi'
+import { updateRole } from '../../../../services/authorizationApi'
+import { roleDetailsPath, roleListPath } from '../../roleRoutes'
+import { permissionNames } from '../../roleFormUtils'
+import RolePageLayout from '../../RolePageLayout'
+import RoleFormFields from '../../RoleFormFields'
 
 function RoleEditPage({ role, permissions, onChanged, onNavigate }) {
   const [name, setName] = useState(role?.name || '')

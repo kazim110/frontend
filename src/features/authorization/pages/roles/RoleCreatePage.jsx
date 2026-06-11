@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { getErrorMessage } from '../../../services/authApi'
-import { createRole } from '../../../services/authorizationApi'
-import { roleListPath } from '../roleRoutes'
-import RolePageLayout from '../RolePageLayout'
-import RoleFormFields from '../RoleFormFields'
+import { getErrorMessage } from '../../../../services/authApi'
+import { createRole } from '../../../../services/authorizationApi'
+import { roleListPath } from '../../roleRoutes'
+import RolePageLayout from '../../RolePageLayout'
+import RoleFormFields from '../../RoleFormFields'
 
 function RoleCreatePage({ permissions, onChanged, onNavigate }) {
   const [name, setName] = useState('')
