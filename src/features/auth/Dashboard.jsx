@@ -1,9 +1,18 @@
+import AuthorizationManager from '../authorization/AuthorizationManager'
+
 function Dashboard({ auth, onLogout }) {
   return (
     <section className="dashboard">
-      <div className="status-pill">Authenticated</div>
-      <h1>Login success</h1>
-      <p className="muted">{auth.message || 'Your frontend is connected to the backend.'}</p>
+      <div className="dashboard-header">
+        <div>
+          <div className="status-pill">Authenticated</div>
+          <h1>Login success</h1>
+          <p className="muted">{auth.message || 'Your frontend is connected to the backend.'}</p>
+        </div>
+        <button className="secondary-button compact-button" type="button" onClick={onLogout}>
+          Logout
+        </button>
+      </div>
 
       <dl className="account-list">
         <div>
@@ -27,9 +36,7 @@ function Dashboard({ auth, onLogout }) {
         </div>
       )}
 
-      <button className="secondary-button" type="button" onClick={onLogout}>
-        Logout
-      </button>
+      <AuthorizationManager />
     </section>
   )
 }
