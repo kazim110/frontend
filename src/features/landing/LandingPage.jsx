@@ -2,10 +2,12 @@ import AboutSection from './AboutSection'
 import ContactSection from './ContactSection'
 import ContractsSection from './ContractsSection'
 import CustomersSection from './CustomersSection'
+import LandingEffects from './LandingEffects'
 
 function LandingPage({ children }) {
   return (
     <main className="landing-page">
+      <LandingEffects />
       <header className="landing-nav">
         <a className="landing-logo" href="#home">
           DORNA<span>XT</span>

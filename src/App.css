@@ -108,10 +108,183 @@
 }
 
 .landing-page {
+  position: relative;
+  isolation: isolate;
   display: grid;
   min-height: 100svh;
   color: #f8fafc;
   background: #171717;
+}
+
+.landing-page > :not(.landing-effects, .mouse-effects) {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-effects {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mouse-effects {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scroll-comet {
+  --comet-x: 64px;
+  --comet-y: 48px;
+  --comet-angle: 90deg;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate3d(var(--comet-x), var(--comet-y), 0) rotate(var(--comet-angle));
+  transform-origin: center;
+  will-change: transform;
+}
+
+.scroll-comet-trail {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.scroll-comet-trail path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.comet-trail-glow {
+  stroke: rgba(249, 115, 22, 0.3);
+  stroke-width: 10;
+  filter: url('#comet-trail-glow');
+}
+
+.comet-trail-core {
+  stroke: url('#comet-trail-gradient');
+  stroke-width: 4;
+  filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.75));
+}
+
+.scroll-comet-halo {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: -21px;
+  top: -21px;
+  border: 1px solid rgba(255, 237, 213, 0.25);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2), transparent 68%);
+  animation: comet-breathe 1.8s ease-in-out infinite;
+}
+
+.scroll-comet-shard {
+  width: 24px;
+  height: 8px;
+  position: absolute;
+  left: -24px;
+  top: -4px;
+  border-radius: 90% 30% 30% 90%;
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0), #fed7aa 72%, #fff);
+  filter: blur(0.4px);
+}
+
+.scroll-comet-core {
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 7px 2px rgba(255, 255, 255, 0.95),
+    0 0 24px 8px rgba(249, 115, 22, 0.72);
+}
+
+.mouse-follower,
+.mouse-dot {
+  --cursor-x: -100px;
+  --cursor-y: -100px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0) translate(-50%, -50%);
+  transition:
+    width 180ms ease,
+    height 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 160ms ease;
+  will-change: transform;
+}
+
+.mouse-follower {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(251, 146, 60, 0.65);
+  background: rgba(249, 115, 22, 0.05);
+  box-shadow:
+    0 0 18px rgba(249, 115, 22, 0.16),
+    inset 0 0 12px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1px);
+}
+
+.mouse-dot {
+  width: 5px;
+  height: 5px;
+  background: #fff7ed;
+  box-shadow: 0 0 10px 2px rgba(249, 115, 22, 0.9);
+}
+
+.mouse-follower.is-visible,
+.mouse-dot.is-visible {
+  opacity: 1;
+}
+
+.mouse-follower.is-interactive {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(255, 237, 213, 0.8);
+  background: rgba(249, 115, 22, 0.12);
+}
+
+@keyframes comet-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-effects,
+  .mouse-effects {
+    display: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mouse-follower,
+  .mouse-dot {
+    display: none;
+  }
 }
 
 .landing-nav {
