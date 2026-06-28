@@ -3,16 +3,16 @@ function AboutSection() {
     <section className="landing-section about-section" id="about">
       <div>
         <p className="eyebrow">About Dorna</p>
-        <h2>Digital systems for teams that need clarity, speed, and control.</h2>
+        <h2>We are a creative digital marketing agency.</h2>
       </div>
       <div className="about-copy">
         <p>
-          Dorna combines product thinking, clean interfaces, and backend workflows for companies
-          that want dependable digital operations.
+          We combine strategy, design, development, and access-controlled systems so your public
+          website and internal workspace feel like one polished product.
         </p>
         <p>
-          We design the customer-facing experience and the private management tools behind it, from
-          authentication to roles, permissions, contracts, and reporting.
+          Our process follows focused discovery, sharp visual direction, secure implementation, and
+          ongoing optimization after launch.
         </p>
       </div>
     </section>

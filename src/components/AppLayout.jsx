@@ -3,6 +3,10 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 
 function AppLayout({ children, auth }) {
+  if (!auth) {
+    return children
+  }
+
   return (
     <div className="app-frame">
       <Header auth={auth} />

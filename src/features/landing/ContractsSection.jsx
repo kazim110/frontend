@@ -22,7 +22,7 @@ function ContractsSection() {
       <div className="section-heading landing-heading">
         <div>
           <p className="eyebrow">Contracts</p>
-          <h2>Simple engagement models for each stage of work.</h2>
+          <h2>Follow these steps to expand your business.</h2>
         </div>
       </div>
 

@@ -2,38 +2,55 @@ import AboutSection from './AboutSection'
 import ContactSection from './ContactSection'
 import ContractsSection from './ContractsSection'
 import CustomersSection from './CustomersSection'
+import LandingEffects from './LandingEffects'
 
 function LandingPage({ children }) {
   return (
     <main className="landing-page">
+      <LandingEffects />
+      <header className="landing-nav">
+        <a className="landing-logo" href="#home">
+          DORNA<span>XT</span>
+        </a>
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#customers">Customers</a>
+          <a href="#contracts">Contracts</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a className="landing-nav-action" href="#contact">Get in touch</a>
+      </header>
+
       <section className="landing-hero" id="home">
         <div className="landing-hero-copy">
           <p className="eyebrow">Digital agency</p>
-          <h1>Building digital products, brands, and secure workspaces.</h1>
+          <h1>Business Solution by Digital <span>Agency</span></h1>
           <p>
-            Dorna helps teams launch polished websites, authenticated platforms, and operational
-            tools with role-based access from day one.
+            We craft brand systems, conversion websites, authenticated platforms, and operational
+            tools that help teams move faster with confidence.
           </p>
           <div className="landing-actions">
             <a className="primary-button hero-button" href="#contact">
-              Start project
+              Get in touch
             </a>
-            <a className="secondary-button hero-button" href="#about">
-              Explore agency
+            <a className="secondary-button hero-button" href="#contracts">
+              View contracts
             </a>
           </div>
         </div>
 
         <div className="hero-visual" aria-hidden="true">
+          <div className="hero-photo"></div>
           <div className="hero-card hero-card-main">
-            <span>Strategy</span>
-            <strong>92%</strong>
-            <small>delivery confidence</small>
+            <span>Projects</span>
+            <strong>240+</strong>
+            <small>business people registered</small>
           </div>
           <div className="hero-card hero-card-alt">
-            <span>Access</span>
-            <strong>Roles</strong>
-            <small>permissions ready</small>
+            <span>Growth</span>
+            <strong>2K+</strong>
+            <small>software businesses</small>
           </div>
         </div>
       </section>
